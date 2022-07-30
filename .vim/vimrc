@@ -90,7 +90,7 @@ set wildmenu
 set statusline+=;\ %f\ %m\ -\ FileType:\ %y
 set statusline+=%=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
 set belloff=esc,error
-set backspace=indent,eol,nostop
+set backspace=indent,eol,start
 set clipboard=unnamed
 if has('python3/dyn')
     set pythonthreedll=python39
