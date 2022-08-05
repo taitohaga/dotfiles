@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -ue
 
@@ -34,24 +34,19 @@ link_to_homedir() {
 
     if [ "$HOME" != "$DOTDIR" ]; then
         for f in $DOTDIR/.??*; do
-            if [ `basename $f` == ".git" ]
-            then
+            if [ `basename $f` == ".git" ]; then
                 continue
             fi
-            if [ `basename $f` == ".gitignore" ]
-            then
+            if [ `basename $f` == ".gitignore" ]; then
                 continue
             fi
-            if [ `basename $f` == "README.md" ]
-            then
+            if [ `basename $f` == "README.md" ]; then
                 continue
             fi
-            if [ `basename $f` == "install.sh" ]
-            then
+            if [ `basename $f` == "install.sh" ]; then
                 continue
             fi
-            if [ `basename $f` == "install.bat" ]
-            then
+            if [ `basename $f` == "install.bat" ]; then
                 continue
             fi
             
