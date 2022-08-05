@@ -5,6 +5,8 @@
 !/.vim/
 !/.vim/vimrc
 
-!/.gitignore
 !/install.sh
 !/install.bat
+
+!/.gitignore
+!/README.md
