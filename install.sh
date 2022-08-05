@@ -10,7 +10,7 @@ helpmsg() {
 }
 
 download_repo() {
-    if has "git"; then
+    if type "git" > /dev/null 2>&1; then
         if [[ ! -d "$DOTDIR" ]]; then
             git clone https://github.com/taitohaga/dotfiles.git $DOTDIR
         else
