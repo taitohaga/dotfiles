@@ -5,6 +5,8 @@ set DOTDIR=%HOMEPATH%\dotfiles
 where git
 if %ERRORLEVEL% == 0 (
     if not exist "%DOTDIR%" (
+        git config --system core.symlinks true
+        git config --global core.symlinks true
         git clone "https://github.com/taitohaga/dotfiles.git" "%DOTDIR%"
     ) else (
         echo "%DOTDIR% already exists. Quitting..."
