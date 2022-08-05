@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 set -ue
 
@@ -11,7 +11,7 @@ helpmsg() {
 
 download_repo() {
     if type "git" > /dev/null 2>&1; then
-        if [[ ! -d "$DOTDIR" ]]; then
+        if [ ! -d "$DOTDIR" ]; then
             git clone https://github.com/taitohaga/dotfiles.git $DOTDIR
         else
             echo "$DOTDIR already exists. Quitting..."
@@ -32,18 +32,18 @@ link_to_homedir() {
         command mkdir "$HOME/.dotbackup"
     fi
 
-    if [[ "$HOME" != "$DOTDIR" ]]; then
+    if [ "$HOME" != "$DOTDIR" ]; then
         for f in $DOTDIR/.??*; do
-            [[ `basename $f` == ".git" ]] && continue
-            [[ `basename $f` == ".gitignore" ]] && continue
-            [[ `basename $f` == "README.md" ]] && continue
-            [[ `basename $f` == "install.sh" ]] && continue
-            [[ `basename $f` == "install.bat" ]] && continue
+            [ `basename $f` == ".git" ] && continue
+            [ `basename $f` == ".gitignore" ] && continue
+            [ `basename $f` == "README.md" ] && continue
+            [ `basename $f` == "install.sh" ] && continue
+            [ `basename $f` == "install.bat" ] && continue
             
-            if [[ -L "$HOME/`basename $f`" ]]; then
+            if [ -L "$HOME/`basename $f`" ]; then
                 command rm -f "$HOME/`basename $f`"
             fi
-            if [[ -e "$HOME/`basename $f`" ]]; then
+            if [ -e "$HOME/`basename $f`" ]; then
                 command mv "$HOME/`basename $f`" "$HOME/.dotbackup"
             fi
             command ln -snf $f $HOME
