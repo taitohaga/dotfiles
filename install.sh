@@ -2,9 +2,26 @@
 
 set -ue
 
+DOTDIR="$HOME/dotfiles"
+
 helpmsg() {
     command echo "Usage: $0 [--help | -h]" 0>&2
     command echo ""
+}
+
+download_repo() {
+    if has "git"; then
+        if [[ ! -d "$DOTDIR" ]]; then
+            git clone https://github.com/taitohaga/dotfiles.git $DOTDIR
+        else
+            echo "$DOTDIR already exists. Quitting..."
+            exit 1
+        fi
+    else
+        echo "git required"
+        exit 1
+    fi
+
 }
 
 link_to_homedir() {
@@ -15,11 +32,14 @@ link_to_homedir() {
         command mkdir "$HOME/.dotbackup"
     fi
 
-    local dotdir="$(cd "$(dirname "${BASH_SOURCE:-$0}")" && pwd -P)"
-    if [[ "$HOME" != "$dotdir" ]]; then
-        for f in $dotdir/.??*; do
+    if [[ "$HOME" != "$DOTDIR" ]]; then
+        for f in $DOTDIR/.??*; do
             [[ `basename $f` == ".git" ]] && continue
             [[ `basename $f` == ".gitignore" ]] && continue
+            [[ `basename $f` == "README.md" ]] && continue
+            [[ `basename $f` == "install.sh" ]] && continue
+            [[ `basename $f` == "install.bat" ]] && continue
+            
             if [[ -L "$HOME/`basename $f`" ]]; then
                 command rm -f "$HOME/`basename $f`"
             fi
@@ -48,5 +68,6 @@ while [ $# -gt 0 ];do
     shift
 done
 
+download_repo
 link_to_homedir
 command echo "Installation completed!"

@@ -1,5 +1,20 @@
 @echo off
 
+set DOTDIR=%HOMEPATH%\dotfiles
+
+where git
+if %ERRORLEVEL% == 0 (
+    if not exist "%DOTDIR%" (
+        git clone "https://github.com/taitohaga/dotfiles.git" "%DOTDIR%"
+    ) else (
+        echo "%DOTDIR% already exists. Quitting..."
+        exit /b 1
+    )
+) else (
+    echo "git required" >&2
+    exit /b 1
+)
+
 echo "Backup files of the old vimfiles in %HOMEPATH%\vimfiles_old "
 
 if exist "%HOMEPATH%\vimfiles" (
@@ -8,4 +23,4 @@ if exist "%HOMEPATH%\vimfiles" (
     del "%HOMEPATH%\vimfiles"
 )
 
-mklink /D "%HOMEPATH%\vimfiles" ".\.vim"
+mklink /D "%HOMEPATH%\vimfiles" "%DOTDIR%\.vim"
