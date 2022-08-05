@@ -14,8 +14,7 @@ download_repo() {
         if [ ! -d "$DOTDIR" ]; then
             git clone https://github.com/taitohaga/dotfiles.git $DOTDIR
         else
-            echo "$DOTDIR already exists. Quitting..."
-            exit 1
+            echo "$DOTDIR already exists."
         fi
     else
         echo "git required"

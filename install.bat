@@ -9,8 +9,7 @@ if %ERRORLEVEL% == 0 (
         git config --global core.symlinks true
         git clone "https://github.com/taitohaga/dotfiles.git" "%DOTDIR%"
     ) else (
-        echo "%DOTDIR% already exists. Quitting..."
-        exit /b 1
+        echo "%DOTDIR% already exists."
     )
 ) else (
     echo "git required" >&2
