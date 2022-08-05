@@ -9,7 +9,7 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
-prompt elite2 green
+prompt adam1
 
 
 if [ -x /usr/bin/dircolors ]; then

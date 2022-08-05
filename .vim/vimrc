@@ -121,9 +121,12 @@ augroup filetype_python
 augroup END
 
 " javascript
-augroup filetype_javascript
+augroup filetype_jsts
     autocmd! *
-    autocmd FileType javascript inoremap <buffer>{<CR> {}<Left><CR><Esc>O
+    autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 expandtab autoindent
+    autocmd FileType typescript setlocal shiftwidth=4 tabstop=4 expandtab autoindent
+    autocmd FileType javascriptreact setlocal shiftwidth=4 tabstop=4 expandtab autoindent
+    autocmd FileType typescriptreact setlocal shiftwidth=4 tabstop=4 expandtab autoindent
 augroup END
 
 " rust
