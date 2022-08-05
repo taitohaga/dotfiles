@@ -34,11 +34,26 @@ link_to_homedir() {
 
     if [ "$HOME" != "$DOTDIR" ]; then
         for f in $DOTDIR/.??*; do
-            if [ `basename $f` == ".git" ]; then; continue; fi
-            if [ `basename $f` == ".gitignore" ]; then; continue; fi
-            if [ `basename $f` == "README.md" ]; then; continue; fi
-            if [ `basename $f` == "install.sh" ]; then; continue; fi
-            if [ `basename $f` == "install.bat" ]; then; continue; fi
+            if [ `basename $f` == ".git" ]
+            then
+                continue
+            fi
+            if [ `basename $f` == ".gitignore" ]
+            then
+                continue
+            fi
+            if [ `basename $f` == "README.md" ]
+            then
+                continue
+            fi
+            if [ `basename $f` == "install.sh" ]
+            then
+                continue
+            fi
+            if [ `basename $f` == "install.bat" ]
+            then
+                continue
+            fi
             
             if [ -L "$HOME/`basename $f`" ]; then
                 command rm -f "$HOME/`basename $f`"
