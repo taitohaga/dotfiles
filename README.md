@@ -5,7 +5,7 @@
 For *nix environment, run:
 
 ```
-bash -c "$(https://raw.githubusercontent.com/taitohaga/dotfiles/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/taitohaga/dotfiles/main/install.sh)"
 ```
 
 For Windows, you have to enable Developer Mode in order to permit
