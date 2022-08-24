@@ -23,6 +23,18 @@ download_repo() {
 
 }
 
+check_ignore() {
+    local to_ignore=(".git" ".gitignore" "README.md" "install.sh" "install.bat")
+    for n in "${to_ignore[@]}"; do
+        if [ $1 == "${n}" ]; then
+            echo TRUE
+            return 0
+        fi
+    done
+    echo FALSE
+    return 0
+}
+
 link_to_homedir() {
     command echo "back up old dotfiles..."
 
@@ -33,19 +45,7 @@ link_to_homedir() {
 
     if [ "$HOME" != "$DOTDIR" ]; then
         for f in $DOTDIR/.??*; do
-            if [ `basename $f` == ".git" ]; then
-                continue
-            fi
-            if [ `basename $f` == ".gitignore" ]; then
-                continue
-            fi
-            if [ `basename $f` == "README.md" ]; then
-                continue
-            fi
-            if [ `basename $f` == "install.sh" ]; then
-                continue
-            fi
-            if [ `basename $f` == "install.bat" ]; then
+            if [ `check_ignore $f` == "TRUE" ]; then
                 continue
             fi
             
