@@ -21,7 +21,7 @@ nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
 " select them
-nnoremap <C-a> ggVG
+" nnoremap <C-a> ggVG
 vnoremap <C-a> <Esc>ggVG
 " nervous at splitting
 nnoremap -h <C-w><
@@ -83,7 +83,6 @@ set laststatus=2
 set hidden
 set updatetime=400
 set nowritebackup
-set backupcopy=yes
 set shiftwidth=4 tabstop=4 expandtab autoindent
 set nowrap
 set history=2000
@@ -94,6 +93,7 @@ set statusline+=%=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
 set belloff=esc,error
 set backspace=indent,eol,start
 set clipboard=unnamed
+" set shell=pwsh
 if has('python3/dyn')
     set pythonthreedll=python39
 endif
@@ -106,6 +106,16 @@ let @o = 'ojgqip{dd}j'
 
 " file specific settings -----------------{{{
 
+augroup filetype_python
+    autocmd! *
+    autocmd FileType python nnoremap <buffer><Leader>p :call Autopep8()<CR>
+    autocmd FileType python setlocal colorcolumn=80
+    " autopep8
+    let g:autopep8_disable_show_diff = 1
+    let g:autopep8_on_save = 1
+    let g:autopep8_max_line_length=79
+augroup END
+
 " vimscript
 augroup filetype_vim
     autocmd! *
@@ -115,7 +125,6 @@ augroup END
 " javascript
 function! s:setJsTsCSS() abort
     setlocal shiftwidth=2 tabstop=2 expandtab autoindent
-    inoremap <buffer>{<CR> {}<Left><CR><Esc>O
 endfunction
 
 augroup filetype_jsts
@@ -209,6 +218,8 @@ Plug 'ajpaulson/julia-syntax.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+Plug 'tell-k/vim-autopep8', { 'for': 'python' }
+Plug 'wuelnerdotexe/vim-astro'
 
 call plug#end()
 
@@ -389,11 +400,18 @@ let g:prettier#config#require_pragma = 'false'
 " defaut: 'lf'
 let g:prettier#config#end_of_line = get(g:, 'prettier#config#end_of_line', 'auto')
 
-let g:prettier#config#singleQuote = 'true'
+let g:prettier#config#single_quote = 'true'
 
-let g:prettier#config#jsxSingleQuote = 'false'
+let g:prettier#config#jsxSingle_quote = 'false'
 
-let g:prettier#config#trailingComma = 'es5'
+let g:prettier#config#trailing_comma = 'es5'
 
-let g:prettier#config#arrowParens = 'avoid'
+let g:prettier#config#arrow_parens = 'avoid'
+
+let g:prettier#config#config_precedence = 'file-override'
+
+augroup prettier
+    autocmd!
+    autocmd BufWritePre *.ts,*.tsx,*.jsx Prettier
+augroup END
 " }}}
